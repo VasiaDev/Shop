@@ -25,7 +25,7 @@
         <!--begin::Container-->
         <div class="container-fluid">
             <!--begin::Row-->
-            <div class="row">
+            <div class="row w-50">
                 <form action="{{ route('color.store') }}" method="post">
                     @csrf
 

@@ -25,14 +25,14 @@
         <!--begin::Container-->
         <div class="container-fluid">
             <!--begin::Row-->
-            <div class="row">
+            <div class="row w-50">
                 <form action="{{ route('category.store') }}" method="post">
                     @csrf
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <input type="text" name="title" class="form-control" placeholder="Наименование">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <input type="submit" class="btn btn-primary" value="Добавить">
                     </div>
                 </form>

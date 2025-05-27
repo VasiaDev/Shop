@@ -25,11 +25,11 @@
         <!--begin::Container-->
         <div class="container-fluid">
             <!--begin::Row-->
-            <div class="row">
+            <div class="row w-50">
                 <form action="{{ route('color.update', $color->id) }}" method="post">
                     @csrf
                     @method('patch')
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <input type="text" name="title" value="{{ $color->title }}" class="form-control" placeholder="Наименование">
                     </div>
                     <div class="form-group">

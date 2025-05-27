@@ -233,7 +233,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="./docs/layout.html" class="nav-link">
+                        <a href="{{ route('product.index') }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-shirt"></i>
                             <p>Продукты</p>
                         </a>
@@ -257,7 +257,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="./docs/layout.html" class="nav-link">
+                        <a href="{{ route('user.index') }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-users"></i>
                             <p>Пользователи</p>
                         </a>
