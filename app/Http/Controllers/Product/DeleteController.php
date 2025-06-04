@@ -9,6 +9,9 @@ class DeleteController extends Controller
 {
     public function __invoke(Product $product)
     {
+        $product->colors()->detach();
+        $product->tags()->detach();
+
         $product->delete();
 
         return redirect()->route('product.index');

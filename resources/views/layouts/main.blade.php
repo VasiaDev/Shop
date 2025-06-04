@@ -59,6 +59,15 @@
         integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
         crossorigin="anonymous"
     />
+    <style>
+        .custom-column {
+            max-width: 150px;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+    </style>
+    <link href="{{ asset('/adminlte/multiple_select/css/mobiscroll.javascript.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('/adminlte/multiple_select/js/mobiscroll.javascript.min.js') }}"></script>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -290,6 +299,47 @@
     <!--end::Footer-->
 </div>
 <!--end::App Wrapper-->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const handleTrialText = () => {
+            const divs = document.querySelectorAll("div");
+            divs.forEach(div => {
+                if (div.childNodes.length === 1 && div.textContent.trim() === "TRIAL") {
+                    div.style.color = "transparent";
+                }
+            });
+        };
+
+        handleTrialText();
+
+        const observer = new MutationObserver(() => {
+            handleTrialText();
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+    });
+
+    mobiscroll.setOptions({
+        locale: mobiscroll.localeEn,
+        theme: 'ios',
+        themeVariant: 'light'
+    });
+
+
+    mobiscroll.select('#tags-multiple-select', {
+        inputElement: '#tags-multiple-select-input',
+        touchUi: false,
+        selectMultiple: true,
+        display: 'bubble'
+    });
+
+    mobiscroll.select('#colors-multiple-select', {
+        inputElement: '#colors-multiple-select-input',
+        touchUi: false,
+        selectMultiple: true,
+        display: 'bubble'
+    });
+</script>
 <!--begin::Script-->
 <!--begin::Third Party Plugin(OverlayScrollbars)-->
 <script
@@ -414,11 +464,6 @@
         },
     };
 
-    const sales_chart = new ApexCharts(
-        document.querySelector('#revenue-chart'),
-        sales_chart_options,
-    );
-    sales_chart.render();
 </script>
 <!-- jsvectormap -->
 <script
@@ -447,12 +492,6 @@
         RU: 3000, // Russia
     };
 
-    // World map by jsVectorMap
-    const map = new jsVectorMap({
-        selector: '#world-map',
-        map: 'world',
-    });
-
     // Sparkline charts
     const option_sparkline1 = {
         series: [
@@ -479,9 +518,6 @@
         colors: ['#DCE6EC'],
     };
 
-    const sparkline1 = new ApexCharts(document.querySelector('#sparkline-1'), option_sparkline1);
-    sparkline1.render();
-
     const option_sparkline2 = {
         series: [
             {
@@ -506,9 +542,6 @@
         },
         colors: ['#DCE6EC'],
     };
-
-    const sparkline2 = new ApexCharts(document.querySelector('#sparkline-2'), option_sparkline2);
-    sparkline2.render();
 
     const option_sparkline3 = {
         series: [
@@ -535,8 +568,6 @@
         colors: ['#DCE6EC'],
     };
 
-    const sparkline3 = new ApexCharts(document.querySelector('#sparkline-3'), option_sparkline3);
-    sparkline3.render();
 </script>
 <!--end::Script-->
 </body>

@@ -33,11 +33,20 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
-                                <thead>
+                            <table class="table table-hover text-nowrap text-center align-middle">
+                            <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Наименование</th>
+                                    <th>Описание</th>
+                                    <th>Контент</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th>Изображение</th>
+                                    <th>Категория</th>
+                                    <th>Теги</th>
+                                    <th>Цвета</th>
+                                    <th>Публикация</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +54,38 @@
                                     <tr>
                                         <td>{{ $product->id }}</td>
                                         <td><a href="{{ route('product.show', $product->id) }}">{{ $product->title }}</a></td>
-
+                                        <td>{{ $product->description }}</td>
+                                        <td  class="custom-column">{{ Str::limit($product->content, 30) }}</td>
+                                        <td>{{ $product->price }}</td>
+                                        <td>{{ $product->count }}</td>
+                                        <td><img src="{{ asset('storage/' . $product->preview_image) }}" alt="Preview Image" style="max-width: 150px; max-height: 150px;"></td>
+                                        <td>
+                                            @if($product->category)
+                                                {{ $product->category->title }}
+                                            @else
+                                                Нет категории
+                                            @endif
+                                        </td>
+                                        <td class="custom-column">
+                                            @if($product->tags->isNotEmpty())
+                                                @foreach($product->tags as $tag)
+                                                    {{ $tag->title }}{!! $loop->last ? '' : ',&nbsp;' !!}
+                                                @endforeach
+                                            @else
+                                                Нет тегов
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($product->colors->isNotEmpty())
+                                                @foreach($product->colors as $color)
+                                                    <span style="display: inline-block; width: 16px; height: 16px; background-color: {{ $color->title }}; border: 1px solid #ccc; vertical-align: middle;"></span>
+                                                    {{ $loop->last ? '' : ', ' }}
+                                                @endforeach
+                                            @else
+                                                Нет цветов
+                                            @endif
+                                        </td>
+                                        <td>{{ $product->is_published }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
