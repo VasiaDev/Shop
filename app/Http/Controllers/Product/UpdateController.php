@@ -17,6 +17,10 @@ class UpdateController extends Controller
 
         unset($data['tag_ids'], $data['color_ids']);
 
+        if (isset($data['price']) && $product->price != $data['price']) {
+            $data['old_price'] = $product->price;
+        }
+
         $product->update($data);
 
         $product->tags()->sync($tagIds);
