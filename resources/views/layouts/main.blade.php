@@ -248,6 +248,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('group.index') }}" class="nav-link">
+                            <i class="nav-icon fa-solid fa-layer-group"></i>
+                            <p>Группы</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('category.index') }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-list"></i>
                             <p>Категории</p>
