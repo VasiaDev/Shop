@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreRequest;
 use App\Models\Product;
 use App\Models\ProductColor;
+use App\Models\ProductImage;
 use App\Models\ProductTag;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,11 +16,12 @@ class StoreController extends Controller
     {
         $data = $request->validated();
 
+        $productImages = $data['product_images'];
         $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
 
         $tagsIds = $data['tag_ids'];
         $colorsIds = $data['color_ids'];
-        unset($data['tag_ids'], $data['color_ids']);
+        unset($data['tag_ids'], $data['color_ids'], $data['product_images']);
 
         $product = Product::firstOrCreate([
             'title' => $data['title'],
@@ -36,6 +38,18 @@ class StoreController extends Controller
             ProductColor::firstOrCreate([
                 'product_id' => $product->id,
                 'color_id' => $colorsId,
+            ]);
+        }
+
+        foreach ($productImages as $productImage) {
+        $currentImages = ProductImage::where('product_id', $product->id)->get();
+
+        if (count($currentImages) > 3) continue;
+
+        $filePath = Storage::disk('public')->put('/images', $productImage);
+            ProductImage::create([
+                'product_id' => $product->id,
+                'file_path' => $filePath
             ]);
         }
 

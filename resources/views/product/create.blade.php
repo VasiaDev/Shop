@@ -54,6 +54,36 @@
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="input-group mt-3 w-75">
+                        <label class="form-label">Добавить изображение</label>
+                        <div class="input-group">
+                            <input type="file" value="{{ old('product_images[]') }}" class="form-control" id="inputGroupFile02" name="product_images[]">
+                            <label class="input-group-text" for="inputGroupFile02">Загрузить</label>
+                        </div>
+                        @error('product_images[]')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="input-group mt-3 w-75">
+                        <label class="form-label">Добавить изображение</label>
+                        <div class="input-group">
+                            <input type="file" value="{{ old('product_images[]') }}" class="form-control" id="inputGroupFile02" name="product_images[]">
+                            <label class="input-group-text" for="inputGroupFile02">Загрузить</label>
+                        </div>
+                        @error('product_images[]')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="input-group mt-3 w-75">
+                        <label class="form-label">Добавить изображение</label>
+                        <div class="input-group">
+                            <input type="file" value="{{ old('product_images[]') }}" class="form-control" id="inputGroupFile02" name="product_images[]">
+                            <label class="input-group-text" for="inputGroupFile02">Загрузить</label>
+                        </div>
+                        @error('product_images[]')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div class="form-group mt-3 w-50">
                         <select name="category_id" class="form-select">
                             <option selected="selected" disabled>Выберите категорию</option>

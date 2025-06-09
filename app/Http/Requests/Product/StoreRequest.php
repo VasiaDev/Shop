@@ -28,10 +28,12 @@ class StoreRequest extends FormRequest
             'price' => 'required',
             'count' => 'required',
             'preview_image' => 'required',
+            'product_images' => 'nullable|array',
+            'product_images.*' => 'image',
             'category_id' => 'nullable',
             'tag_ids' => 'nullable|array',
             'color_ids' => 'nullable|array',
-            'is_published' => 'nullable'
+            'is_published' => 'nullable',
         ];
     }
 }
