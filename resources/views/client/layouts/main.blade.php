@@ -30,7 +30,7 @@
     <!-- Style Css -->
     <link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}">
 
-    <script type="module" src="/build/assets/app-ByjQgBay.js"></script>
+    @vite('resources/js/app.js')
 </head>
 
 @yield('content')

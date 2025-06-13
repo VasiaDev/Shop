@@ -215,8 +215,8 @@
             <h6 class="text-uppercase">Total:</h6>
             <h6 class="ammount text-uppercase">$850.00</h6>
           </div>
-          <div class="button-box d-flex justify-content-between"> <a href="cart.html" class="btn_black"> View Cart
-          </a> <a href="cart.html" class="button-2 btn_theme"> Chekout </a> </div>
+          <div class="button-box d-flex justify-content-between"> <router-link to="/cart" class="btn_black"> View Cart
+          </router-link> <a href="cart.html" class="button-2 btn_theme"> Chekout </a> </div>
         </div>
       </div>
       <div class="sidebar-content-closer"></div>

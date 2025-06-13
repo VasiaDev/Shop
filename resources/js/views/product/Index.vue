@@ -197,7 +197,7 @@
                               <div class="products-grid-one__badge-box"> <span
                                   class="bg_base badge new ">New</span>
                               </div>
-                              <a @click.prevent="addToCart(product.id, true)" href="cart.html" class="addcart btn--primary style2">
+                              <a @click.prevent="addToCart(product, true)" href="cart.html" class="addcart btn--primary style2">
                                 Add To Cart </a>
                               <div class="products-grid__usefull-links">
                                 <ul>
@@ -279,7 +279,7 @@
                                             <span class="increaseQty"> <i
                                                 class="flaticon-plus"></i>
                                                                                     </span> </div>
-                                          <button @click.prevent="addToCart(product.id)" class="btn--primary "> Add to
+                                          <button @click.prevent="addToCart(product)" class="btn--primary "> Add to
                                             Cart </button>
                                         </div>
                                       </div>
@@ -373,14 +373,17 @@ export default {
   },
 
   methods: {
-    addToCart(id, isSingle) {
+    addToCart(product, isSingle) {
 
       let qty = isSingle ? 1 : $('.qtyValue').val();
       let cart = localStorage.getItem('cart');
       $('.qtyValue').val(1);
       let newProduct = [
         {
-          'id': id,
+          'id': product.id,
+          'image_url': product.image_url,
+          'title': product.title,
+          'price': product.price,
           'qty': qty
         }
       ]
@@ -390,7 +393,7 @@ export default {
       } else {
         cart = JSON.parse(cart);
         cart.forEach((productInCart) => {
-          if (productInCart.id === id) {
+          if (productInCart.id === product.id) {
             productInCart.qty = Number(productInCart.qty) + Number(qty);
             newProduct = null;
           }
