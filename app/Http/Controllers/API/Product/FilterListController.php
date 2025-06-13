@@ -11,7 +11,7 @@ use App\Models\Tag;
 
 class FilterListController extends Controller
 {
-    public function __invoke(Product $product)
+    public function __invoke()
     {
         $categories = Category::all();
         $colors = Color::all();
