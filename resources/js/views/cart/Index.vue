@@ -100,6 +100,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row w-25">
+                        <input type="text" v-model="name" placeholder="name">
+                        <input type="text" v-model="address" placeholder="address">
+                        <input type="text" v-model="email" placeholder="email">
+                        <input @click.prevent="storeOrder" type="submit" class="btn btn-primary" value="Оформить">
+                    </div>
                     <div class="row pt-120">
                         <div class="col-xl-6 col-lg-7 wow fadeInUp animated">
                             <div class="cart-total-box">
@@ -199,7 +205,21 @@ export default {
 
     data() {
         return {
-            products: []
+            products: [],
+            name: '',
+            address: '',
+            email: ''
+        }
+    },
+
+    computed: {
+        totalPrice() {
+            let total = 0;
+            this.products.forEach( product => {
+                total += parseFloat(product.price);
+            })
+            console.log(total);
+            return total;
         }
     },
 
@@ -225,7 +245,21 @@ export default {
         },
         updateCart() {
             localStorage.setItem('cart', JSON.stringify(this.products));
-        }
+        },
+        storeOrder () {
+            this.axios.post(`/api/orders/`, {
+                'products': JSON.stringify(this.products),
+                'name': this.name,
+                'email': this.email,
+                'address': this.address,
+                'total_price': Number(this.totalPrice)
+            }).then( res => {
+                console.log(res);
+            })
+                .finally(v => {
+                    $(document).trigger('changed')
+                })
+        },
     }
 }
 </script>
