@@ -8,7 +8,10 @@ use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
+use Throwable;
 
 class StoreController extends Controller
 {
@@ -17,40 +20,48 @@ class StoreController extends Controller
         $data = $request->validated();
 
         $productImages = $data['product_images'];
-        $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
-
         $tagsIds = $data['tag_ids'];
         $colorsIds = $data['color_ids'];
         unset($data['tag_ids'], $data['color_ids'], $data['product_images']);
 
-        $product = Product::firstOrCreate([
-            'title' => $data['title'],
-        ], $data);
+        $previewImagePath = Storage::disk('public')->put('/images', $data['preview_image']);
+        $data['preview_image'] = $previewImagePath;
 
-        foreach ($tagsIds as $tagsId) {
-            ProductTag::firstOrCreate([
-               'product_id' => $product->id,
-               'tag_id' => $tagsId,
-            ]);
-        }
+        try {
+            DB::beginTransaction();
 
-        foreach ($colorsIds as $colorsId) {
-            ProductColor::firstOrCreate([
-                'product_id' => $product->id,
-                'color_id' => $colorsId,
-            ]);
-        }
+            $product = Product::create($data);
 
-        foreach ($productImages as $productImage) {
-        $currentImagesCount = ProductImage::where('product_id', $product->id)->count();
+            foreach ($tagsIds as $tagId) {
+                ProductTag::create([
+                    'product_id' => $product->id,
+                    'tag_id' => $tagId,
+                ]);
+            }
 
-        if ($currentImagesCount > 3) continue;
+            foreach ($colorsIds as $colorId) {
+                ProductColor::create([
+                    'product_id' => $product->id,
+                    'color_id' => $colorId,
+                ]);
+            }
 
-        $filePath = Storage::disk('public')->put('/images', $productImage);
-            ProductImage::create([
-                'product_id' => $product->id,
-                'file_path' => $filePath
-            ]);
+            foreach ($productImages as $productImage) {
+                $count = ProductImage::where('product_id', $product->id)->count();
+                if ($count > 3) continue;
+
+                $filePath = Storage::disk('public')->put('/images', $productImage);
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'file_path' => $filePath,
+                ]);
+            }
+
+            DB::commit();
+        } catch (Throwable $e) {
+            DB::rollBack();
+            Storage::disk('public')->delete($previewImagePath);
+            throw $e;
         }
 
         return redirect()->route('product.index');

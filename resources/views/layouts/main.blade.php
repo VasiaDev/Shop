@@ -65,6 +65,14 @@
             overflow-wrap: break-word;
             white-space: normal;
         }
+        table {
+            width: 100%;
+        }
+        .small-column {
+            width: 10px;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
     </style>
     <link href="{{ asset('/adminlte/multiple_select/css/mobiscroll.javascript.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('/adminlte/multiple_select/js/mobiscroll.javascript.min.js') }}"></script>
@@ -219,7 +227,11 @@
             <!--begin::Brand Link-->
             <a href="./index.html" class="brand-link">
                 <!--begin::Brand Text-->
-                <span class="brand-text fw-light">AdminShop</span>
+                <span class="brand-text">
+                  <span class="fw-bold fs-4">Cartify</span>
+                  <span class="fw-light fs-6 ms-1">Control Panel</span>
+                </span>
+
                 <!--end::Brand Text-->
             </a>
             <!--end::Brand Link-->

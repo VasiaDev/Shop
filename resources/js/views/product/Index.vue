@@ -268,6 +268,7 @@
                                           <a @click.prevent="getProduct(groupProduct.id)" v-for="color in groupProduct.colors" href="#0" :style="`background: ${color.title};`" class="color-name"> <span>{{ color.title }}</span> </a>
                                         </template>
                                       </div>
+
                                       <div class="add-product">
                                         <h6>Qty:</h6>
                                         <div class="button-group">
@@ -452,7 +453,7 @@ export default {
           console.log(res.data);
 
           const min = parseFloat(this.filterList.price.min);
-        const max = parseFloat(this.filterList.price.max);
+          const max = parseFloat(this.filterList.price.max);
 
         //  Price Filter
         if ($("#price-range").length) {

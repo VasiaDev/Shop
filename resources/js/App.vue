@@ -12,8 +12,7 @@
                   <div class="row">
                     <div class="menu-info d-flex justify-content-between align-items-center">
                       <div class="menubar"> <span></span> <span></span> <span></span> </div> <a
-                        href="index.html" class="logo"> <img src="/public/assets/images/logo/logo.png"
-                                                             alt=""> </a>
+                        href="index.html" class="logo"> <img src="/public/assets/images/logo/logo.png" width="150" height="100" alt=""> </a>
                       <div class="cart-holder">
                         <a href="#0" class="cart cart-icon position-relative">
                           <i class="flaticon-shopping-cart"></i>
@@ -44,7 +43,7 @@
           <div class="d-lg-block d-none">
             <div class="row g-0 position-relative">
               <div class="col-lg-3 d-flex align-items-center justify-content-center border-rit ">
-                <div class="logo"> <a href="index.html"> <img src="/public/assets/images/logo/logo.png" alt=""> </a>
+                <div class="logo"> <a href="index.html"> <img src="/public/assets/images/logo/logo.png" width="150" height="100" alt=""> </a>
                 </div>
               </div>
               <div class="col-lg-9 g-0 p-0">
@@ -52,18 +51,18 @@
                   <div class="col-12">
                     <div class="some-info">
                       <p class="d-flex align-items-center"> <span class="icon"> <i
-                          class="flaticon-power"></i> </span> Welcome to Karte Online Shop</p>
+                          class="flaticon-power"></i> </span>Добро пожаловать в интернет-магазин Cartify</p>
                       <div class="right d-flex align-items-center ">
                         <div class="language currency"> <select>
-                          <option>USD</option>
-                          <option value="1">INR</option>
-                          <option value="2">BDT</option>
+                          <option>MDL</option>
+                          <option value="1">USD</option>
+                          <option value="2">EUR</option>
                         </select> </div>
                         <div class="language two"> <select>
-                          <option>ENGLISH </option>
-                          <option value="1">GERMAN</option>
-                          <option value="4">FRENCH</option>
-                        </select> </div> <a href="login.html"> Sign In / Register </a>
+                          <option>РУССКИЙ </option>
+                          <option value="1">АНГЛИЙСКИЙ</option>
+                          <option value="4">РУМЫНСКИЙ</option>
+                        </select> </div> <a href="login.html"> Вход / Регистрация </a>
                       </div>
                     </div>
                   </div>
@@ -76,7 +75,7 @@
                         <nav>
                           <ul
                               class="page-dropdown-menu d-flex align-items-center justify-content-center">
-                            <li class="dropdown-list"> <router-link to="/"> <span>Home</span> </router-link></li>
+                            <li class="dropdown-list"> <router-link to="/"> <span>Главная</span> </router-link></li>
                             <li class="dropdown-list"> <router-link to="/products"> <span>Продукты </span> </router-link></li>
 
                           </ul>
@@ -115,7 +114,7 @@
               <div class="row">
                 <div class="menu-info d-flex justify-content-between align-items-center">
                   <div class="menubar"> <span></span> <span></span> <span></span> </div> <a
-                    href="index.html" class="logo"> <img src="/public/assets/images/logo/logo.png" alt=""> </a>
+                    href="index.html" class="logo"> <img src="/public/assets/images/logo/logo.png" width="150" height="100" alt=""> </a>
                   <div class="cart-holder">
                     <a href="#0" class="cart cart-icon position-relative">
                       <i class="flaticon-shopping-cart"></i>
@@ -128,7 +127,7 @@
         </div>
         <div class="container position-relative d-lg-block d-none">
           <div class="d-flex align-items-center justify-content-between"> <a href="index.html" class="logo me-2">
-            <img src="/public/assets/images/logo/logo.png" alt=""> </a>
+            <img src="/public/assets/images/logo/logo.png" width="150" height="100" alt=""> </a>
             <div class="mega-menu-default mega-menu d-lg-block d-none">
               <div class="container ">
                 <div class="row">

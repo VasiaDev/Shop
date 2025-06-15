@@ -226,7 +226,6 @@ export default {
     methods: {
         getCartProducts() {
             this.products = JSON.parse(localStorage.getItem('cart'));
-            console.log(this.products);
         },
         minusQty(product) {
             if (product.qty === 1) return;

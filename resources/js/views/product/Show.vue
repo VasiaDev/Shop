@@ -8,8 +8,8 @@
             <div class="col-xl-12">
               <div class="shop-details-inner">
                 <ul class="shop-details-menu">
-                  <li><a href="index.html">Home</a></li>
-                  <li class="active">Shop Details</li>
+                  <li><a href="index.html">Главная</a></li>
+                  <li class="active">Карточка товара</li>
                 </ul>
               </div>
             </div>
@@ -18,63 +18,30 @@
       </div>
       <!--End Shop Details Breadcrumb-->
       <!--Start Shop Details Top-->
-      <section class="shop-details-top two ">
+      <section v-if="product" class="shop-details-top two ">
         <div class="container">
           <div class="row mt--30">
             <div class="col-xl-6 col-lg-6 mt-30 wow fadeInUp animated">
-              <div class="single-product-box one">
-                <div class="big-product single-product-one slider-for">
-                  <div>
-                    <div class="single-item"> <img src="/public/assets/images/shop/products-img1.jpg" alt="">
-                      <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                  class="love"> <i class="flaticon-like"></i> </a>
+                <div class="single-product-box one">
+                    <div class="big-product single-product-one slider-for">
+                        <div>
+                            <div class="single-item">
+                                <img :src="activeImage" alt="">
+                                <div class="ptag"><span class="one">-20% </span></div>
+                                <a href="#0" class="love"> <i class="flaticon-like"></i> </a>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div>
-                    <div class="single-item"> <img src="/public/assets/images/shop/products-img2.jpg" alt="">
-                      <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                  class="love"> <i class="flaticon-like"></i> </a>
+                    <div class="navholder">
+                        <div class="product-slicknav single-product-one-nav slider-nav">
+                            <div v-for="productImage in product.product_images" @click="setActiveImage(productImage.url)">
+                                <span class="single-item">
+                                    <img :src="productImage.url" alt="">
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div>
-                    <div class="single-item"> <img src="/public/assets/images/shop/products-img3.jpg" alt="">
-                      <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                  class="love"> <i class="flaticon-like"></i> </a>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="single-item"> <img src="/public/assets/images/shop/products-img4.jpg" alt="">
-                      <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                  class="love"> <i class="flaticon-like"></i> </a>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="single-item"> <img src="/public/assets/images/shop/products-img5.jpg" alt="">
-                      <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                  class="love"> <i class="flaticon-like"></i> </a>
-                    </div>
-                  </div>
                 </div>
-                <div class="navholder">
-                  <div class="product-slicknav single-product-one-nav slider-nav">
-                    <div> <span class="single-item"> <img
-                        src="/public/assets/images/shop/shop-details-top-img-1.png" alt=""> </span>
-                    </div>
-                    <div> <span class="single-item"> <img
-                        src="/public/assets/images/shop/shop-details-top-img-2.png" alt=""> </span>
-                    </div>
-                    <div> <span class="single-item"> <img
-                        src="/public/assets/images/shop/shop-details-top-img-3.png" alt=""> </span>
-                    </div>
-                    <div> <span class="single-item"> <img
-                        src="/public/assets/images/shop/shop-details-top-img-1.png" alt=""> </span>
-                    </div>
-                    <div> <span class="single-item"> <img
-                        src="/public/assets/images/shop/shop-details-top-img-2.png" alt=""> </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="col-xl-6 col-lg-6 mt-30 wow fadeInUp animated">
               <div class="shop-details-top-right ">
@@ -88,24 +55,24 @@
                         <li><i class="flaticon-star-1"></i></li>
                         <li><i class="flaticon-star-1"></i></li>
                       </ul>
-                      <p>(2 Reviews)</p>
+                      <p>(2 Отзыва)</p>
                     </div>
                   </div>
                   <div class="shop-details-top-title">
-                    <h3>Gold Diamond Bracelet</h3>
+                    <h3>{{ product.title }}</h3>
                   </div>
                   <ul class="shop-details-top-info">
-                    <li><span>SKU:</span> 25d5214</li>
-                    <li><span>Vendor:</span> Flemeno</li>
+                    <li><span>Артикул:</span> 25d5214</li>
+                    <li><span>Производитель:</span> Молдова</li>
                   </ul>
                   <div class="shop-details-top-price-box">
-                    <h3>$30.00 <del>$50.00</del></h3>
-                    <p>(+15% Vat Included)</p>
+                    <h3> {{ product.price }} lei <del v-if="product.old_price">{{ product.old_price }} lei</del></h3>
+                    <p>(+15% НДС включено)</p>
                   </div>
-                  <p class="shop-details-top-product-sale"><span>20</span> Products sold in last 12 hours
+                  <p class="shop-details-top-product-sale">Продано <span>20</span> за последние 12 часов
                   </p>
                   <div class="shop-details-top-size-box">
-                    <h4>Size: (XS)</h4>
+                    <h4>Size:</h4>
                     <div class="shop-details-top-size-list-box">
                       <ul class="shop-details-top-size-list">
                         <li><a href="#0">XS</a></li>
@@ -117,37 +84,30 @@
                     </div>
                   </div>
                   <div class="shop-details-top-color-sky-box">
-                    <h4>Color: (Sky Blue)</h4>
-                    <ul class="varients">
-                      <li> <a href="#0" class="shop-details-top-color-sky-img"
-                              data-src="/public/assets/images/shop/products-img1.jpg"> <img
-                          src="/public/assets/images/shop/shop-details-top-color-sky-img-1.jpg"
-                          alt=""> </a> </li>
-                      <li> <a href="#0" class="shop-details-top-color-sky-img"
-                              data-src="/public/assets/images/shop/products-img2.jpg"> <img
-                          src="/public/assets/images/shop/shop-details-top-color-sky-img-2.jpg"
-                          alt=""> </a> </li>
-                      <li> <a href="#0" class="shop-details-top-color-sky-img"
-                              data-src="/public/assets/images/shop/products-img3.jpg"> <img
-                          src="/public/assets/images/shop/shop-details-top-color-sky-img-3.jpg"
-                          alt=""> </a> </li>
-                      <li> <a href="#0" class="shop-details-top-color-sky-img"
-                              data-src="/public/assets/images/shop/products-img4.jpg"> <img
-                          src="/public/assets/images/shop/shop-details-top-color-sky-img-4.jpg"
-                          alt=""> </a> </li>
-                    </ul>
+                    <h4>Colors:</h4>
+                      <template v-if="product.group_products.length">
+                          <template v-for="groupProduct in product.group_products" :key="groupProduct.id">
+                              <template v-if="groupProduct.id === product.id && groupProduct.colors.length">
+                                  <ul>
+                                      <li v-for="color in groupProduct.colors" class="varients">
+                                          <a :style="`background: ${color.title};width: 50px;height: 50px`" href="#0" class="shop-details-top-color-sky-img"></a>
+                                      </li>
+                                  </ul>
+                              </template>
+                          </template>
+                      </template>
                   </div>
                   <ul class="shop-details-top-ask-question">
                     <li> <a href="#0">
                       <div class="icon"> <i class="flaticon-left-and-right-arrows"></i> </div>
                       <div class="text">
-                        <p>Add to Compare</p>
+                        <p>Добавить к сравнению</p>
                       </div>
                     </a> </li>
                     <li> <a href="#0">
                       <div class="icon"> <i class="flaticon-chat-bubble"></i> </div>
                       <div class="text">
-                        <p>Ask Question</p>
+                        <p>Задать вопрос</p>
                       </div>
                     </a> </li>
                   </ul>
@@ -162,10 +122,9 @@
                       </div>
                     </div>
                   </div>
-                  <p class="shop-details-top-product-sale"><span>20</span> Persons looking for this
-                    product</p>
+                  <p class="shop-details-top-product-sale"><span> {{ randomCount }} </span> Покупателей заинтересованы в этом товаре</p>
                   <div class="product-quantity">
-                    <h4>Quantity</h4>
+                    <h4>Кол-во</h4>
                     <div class="product-quantity-box d-flex align-items-center flex-wrap">
                       <div class="qty mr-2">
                         <div class="qtySelector text-center"> <span class="decreaseQty"><i
@@ -174,20 +133,20 @@
                             class="flaticon-plus"></i> </span> </div>
                       </div>
                       <div class="product-quantity-check"> <i class="flaticon-select"></i>
-                        <p>In Stock</p>
+                        <p>В наличии</p>
                       </div>
                     </div>
                   </div>
                   <div class="shop-details-top-order-now"> <i class="flaticon-point"></i>
-                    <p>Order Now, Only 10 Left !</p>
+                    <p>Закажите сейчас, осталось всего {{ product.count }} штук!</p>
                   </div>
                   <div class="shop-details-top-cart-box-btn"> <button class="btn--primary style2 "
-                                                                      type="submit">Add to Cart</button> </div>
+                                                                      type="submit">Добавить в корзину</button> </div>
                   <div class="shop-details-top-free-shipping"> <i class="flaticon-shipping"></i>
-                    <p>SPENT <span>$399.00</span> MORE FOR FREE SHIPPING</p>
+                    <p>Закажите на сумму <span>$99.00</span> и больше для бесплатной доставки</p>
                   </div>
                   <div class="shop-details-top-social-box">
-                    <p>Share:</p>
+                    <p>Поделиться:</p>
                     <ul class="ps-1 social_link d-flex align-items-center">
                       <li><a href="https://www.facebook.com/" class="active" target="_blank"><i
                           class="flaticon-facebook-app-symbol"></i></a> </li>
@@ -201,70 +160,83 @@
                   </div>
                   <div class="checked-box">
                     <form>
-                      <div class="form-group"> <input type="checkbox" id="html"> <label for="html">I
-                        agree with all company terms & condition</label> </div>
+                      <div class="form-group"> <input type="checkbox" id="html"> <label for="html">Я согласен(-а) со всеми правилами и условиями компании</label> </div>
                     </form>
                   </div>
-                  <div class="shop-details-top-buy-now-btn"> <a href="#" class="btn--primary">Buy It
-                    Now</a> </div>
+                  <div class="shop-details-top-buy-now-btn"> <a href="#" class="btn--primary">Купить</a> </div>
                   <div class="shop-details-top-safe-checkout">
-                    <h4>Guranteed Safe Checkout</h4>
+                    <h4>Гарантированна безопасная оплата</h4>
                     <ul class="shop-details-top-safe-checkout-list">
                       <li>
                         <div class="shop-details-top-safe-checkout-img"> <a href="#0"><img
-                            src="/public/assets/images/shop/shop-details-top-safe-checkout-img-1.jpg"
+                            src="/public/assets/images/shop/visa.png"
+                            class="image-zoom"
                             alt=""></a> </div>
                       </li>
                       <li>
                         <div class="shop-details-top-safe-checkout-img"> <a href="#0"><img
-                            src="/public/assets/images/shop/shop-details-top-safe-checkout-img-2.jpg"
+                            src="/public/assets/images/shop/mastercard.png"
+                            class="image-zoom"
                             alt=""></a> </div>
                       </li>
                       <li>
                         <div class="shop-details-top-safe-checkout-img"> <a href="#0"><img
-                            src="/public/assets/images/shop/shop-details-top-safe-checkout-img-3.jpg"
+                            src="/public/assets/images/shop/applepay.png"
+                            class="image-zoom"
                             alt=""></a> </div>
                       </li>
                       <li>
                         <div class="shop-details-top-safe-checkout-img"> <a href="#0"><img
-                            src="/public/assets/images/shop/shop-details-top-safe-checkout-img-4.jpg"
+                            src="/public/assets/images/shop/googlepay.png"
+                            class="image-zoom"
                             alt=""></a> </div>
                       </li>
                       <li>
                         <div class="shop-details-top-safe-checkout-img"> <a href="#0"><img
-                            src="/public/assets/images/shop/shop-details-top-safe-checkout-img-5.jpg"
+                            src="/public/assets/images/shop/smart3ds.png"
+                            class="image-zoom"
                             alt=""></a> </div>
                       </li>
                       <li>
                         <div class="shop-details-top-safe-checkout-img"> <a href="#0"><img
-                            src="/public/assets/images/shop/shop-details-top-safe-checkout-img-7.jpg"
+                            src="/public/assets/images/shop/https.png"
+                            class="image-zoom"
                             alt=""></a> </div>
                       </li>
                     </ul>
                   </div>
-                  <p class="shop-details-top-product-delivery">This product estimated delivery between
-                    <span>Wednesday 27 October</span> <br> <span>Tuesday 02 November</span></p>
-                  <ul class="shop-details-top-category-tags">
-                    <li>Category: <span>Gold Diamond</span></li>
-                    <li>Tags: <span>platinum watch, gold ring, women jewellary</span></li>
-                  </ul>
+                  <p class="shop-details-top-product-delivery">Ожидается, что этот продукт будет доставлен между
+                    <span> {{ deliveryStart }} </span> и <span> {{ deliveryEnd }} </span></p>
+                      <ul class="shop-details-top-category-tags">
+                        <li>Категория: <span> {{ product.category.title }} </span></li>
+                          <template v-if="product.group_products.length">
+                              <template v-for="groupProduct in product.group_products" :key="groupProduct.id">
+                                  <li v-if="groupProduct.id === product.id && groupProduct.tags.length">
+                                      Теги:
+                                      <span>
+                                        {{ groupProduct.tags.map(tag => tag.title).join(', ') }}.
+                                      </span>
+                                  </li>
+                              </template>
+                          </template>
+                      </ul>
                   <ul class="shop-details-top-feature">
                     <li>
                       <div class="icon"> <i class="flaticon-portfolio"></i> </div>
                       <div class="text">
-                        <p>Money back guarantee</p>
+                        <p>Гарантия возврата денег</p>
                       </div>
                     </li>
                     <li>
                       <div class="icon"> <i class="flaticon-truck"></i> </div>
                       <div class="text">
-                        <p>Free Shipping & Return</p>
+                        <p>Бесплатная доставка и возврат</p>
                       </div>
                     </li>
                     <li>
                       <div class="icon"> <i class="flaticon-security"></i> </div>
                       <div class="text">
-                        <p>Comportable Support</p>
+                        <p>Качественная поддержка</p>
                       </div>
                     </li>
                   </ul>
@@ -285,16 +257,16 @@
                 <li class="nav-item" role="presentation"> <button class="nav-link active"
                                                                   id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description"
                                                                   type="button" role="tab" aria-controls="pills-description" aria-selected="true">
-                  Description </button> </li>
+                    Описание </button> </li>
                 <li class="nav-item" role="presentation"> <button class="nav-link" id="pills-additional-tab"
                                                                   data-bs-toggle="pill" data-bs-target="#pills-additional" type="button" role="tab"
-                                                                  aria-controls="pills-additional" aria-selected="false"> Additional </button> </li>
+                                                                  aria-controls="pills-additional" aria-selected="false"> Дополнительно </button> </li>
                 <li class="nav-item" role="presentation"> <button class="nav-link" id="pills-sizechart-tab"
                                                                   data-bs-toggle="pill" data-bs-target="#pills-sizechart" type="button" role="tab"
-                                                                  aria-controls="pills-sizechart" aria-selected="false"> Size Chart </button> </li>
+                                                                  aria-controls="pills-sizechart" aria-selected="false"> Таблица размеров </button> </li>
                 <li class="nav-item" role="presentation"> <button class="nav-link" id="pills-review-tab"
                                                                   data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab"
-                                                                  aria-controls="pills-review" aria-selected="false"> Review </button> </li>
+                                                                  aria-controls="pills-review" aria-selected="false"> Отзывы </button> </li>
               </ul>
             </div>
           </div>
@@ -303,17 +275,8 @@
               <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
                    aria-labelledby="pills-description-tab">
                 <div class="product-drescription">
-                  <h4> Product Details:</h4>
-                  <p> Assertively conceptualize parallel process improvements through user friendly
-                    colighue to action items. Interactively antidos cultivate interdependent customer
-                    service without clicks-and-mortar e-services. Proactively cultivate go forward
-                    testing procedures with accurate quality vectors. Globally aiembrace ethical
-                    functionalities via empowered scenarios. Phosfluorescently restore highly efficient
-                    opportunities and client-focused infomediaries. Enthusiastically transition
-                    multidisciplinary outside the box thinking without premium networks. Progressive
-                    supply clicks-and-mortar human capital through enterprise-wide web services.
-                    Objectivey bester provide access to extensible processes better than more
-                    qulification dumber there stoaling through 24/365 solutions. </p>
+                  <h4> Детали товара:</h4>
+                  <p> {{ product.content }} </p>
                   <div class="row align-items-center">
                     <div class="col-lg-4 mt-30 ">
                       <div class="thumb"> <img
@@ -321,18 +284,13 @@
                           alt=""> </div>
                     </div>
                     <div class="col-lg-8 mt-30">
-                      <h4>Specification:</h4>
+                      <h4>Особенности:</h4>
                       <ul class="drescription-list">
-                        <li> 1. Adipiscing hac cubilia, fermentum ipsum auctor parturient tempus
-                          lobortis fermentum. </li>
-                        <li> 2. Euismod disagree soler imperdiet vehicula pede eros ipsum cras mi
-                          feugiat. </li>
-                        <li> 3. Rhoncus consequat phasellus donec suspendisse scelerisque facilisis
-                          gravida porttitor turpis. </li>
-                        <li> 4. Consequat phasellus donec suspendisse scelerisque facilisis gravida
-                          porttitor turpis. </li>
-                        <li> 5. Consequat phasellus donec suspendisse scelerisque facilisis gravida
-                          porttitor </li>
+                        <li> 1. Асимметричный крой. </li>
+                        <li> 2. Женственный Х-образный силуэт. </li>
+                        <li> 3. Длина до колена. </li>
+                        <li> 4. Идеально для пляжа, прогулок, отдыха. </li>
+                        <li> 5. Лёгкая и приятная к телу ткань </li>
                       </ul>
                     </div>
                   </div>
@@ -369,125 +327,89 @@
                    aria-labelledby="pills-sizechart-tab">
                 <div class="product-drescription">
                   <div class="size-chirt">
-                    <h4>Size Guide</h4>
+                    <h4>Руководство по размерам</h4>
                     <p class="pt-0"> Assertively conceptualize parallel process improvements through
                       user friendly colighue to action items. </p>
-                    <div class="size-tabble">
-                      <table>
-                        <thead>
-                        <tr>
-                          <th>Size</th>
-                          <th>XXS - XS</th>
-                          <th>XS - S</th>
-                          <th>S - M</th>
-                          <th>M - L</th>
-                          <th>L - XL</th>
-                          <th>XL - XXL</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td>ARGENTINA</td>
-                          <td>7</td>
-                          <td>8</td>
-                          <td>9</td>
-                          <td>10</td>
-                          <td>11</td>
-                          <td>12</td>
-                        </tr>
-                        <tr>
-                          <td>BOLIVIA</td>
-                          <td>8</td>
-                          <td>9</td>
-                          <td>10</td>
-                          <td>11</td>
-                          <td>12</td>
-                          <td>13</td>
-                        </tr>
-                        <tr>
-                          <td>COLOMBIA</td>
-                          <td>26</td>
-                          <td>28</td>
-                          <td>30</td>
-                          <td>32</td>
-                          <td>34</td>
-                          <td>36</td>
-                        </tr>
-                        <tr>
-                          <td>China</td>
-                          <td>34</td>
-                          <td>36</td>
-                          <td>38</td>
-                          <td>40</td>
-                          <td>42</td>
-                          <td>44</td>
-                        </tr>
-                        <tr>
-                          <td>MEXICO</td>
-                          <td>32</td>
-                          <td>34</td>
-                          <td>36</td>
-                          <td>38</td>
-                          <td>40</td>
-                          <td>42</td>
-                        </tr>
-                        <tr>
-                          <td>JAMAICA</td>
-                          <td>40</td>
-                          <td>42</td>
-                          <td>44</td>
-                          <td>46</td>
-                          <td>48</td>
-                          <td>50</td>
-                        </tr>
-                        <tr>
-                          <td>MEXICO</td>
-                          <td>32</td>
-                          <td>34</td>
-                          <td>36</td>
-                          <td>38</td>
-                          <td>40</td>
-                          <td>42</td>
-                        </tr>
-                        <tr>
-                          <td>Australia</td>
-                          <td>6</td>
-                          <td>8</td>
-                          <td>10</td>
-                          <td>12</td>
-                          <td>14</td>
-                          <td>16</td>
-                        </tr>
-                        <tr>
-                          <td>USA</td>
-                          <td>33</td>
-                          <td>44</td>
-                          <td>55</td>
-                          <td>66</td>
-                          <td>77</td>
-                          <td>88</td>
-                        </tr>
-                        <tr>
-                          <td>UK</td>
-                          <td>6</td>
-                          <td>8</td>
-                          <td>10</td>
-                          <td>12</td>
-                          <td>14</td>
-                          <td>16</td>
-                        </tr>
-                        <tr>
-                          <td><strong>Pant</strong></td>
-                          <td>22-23 </td>
-                          <td>24-25</td>
-                          <td>26-27</td>
-                          <td>28-29</td>
-                          <td>30-31</td>
-                          <td>32-33</td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                      <div class="size-tabble">
+                          <table>
+                              <thead>
+                              <tr>
+                                  <th>Размер</th>
+                                  <th>XXS - XS</th>
+                                  <th>XS - S</th>
+                                  <th>S - M</th>
+                                  <th>M - L</th>
+                                  <th>L - XL</th>
+                                  <th>XL - XXL</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                  <td>Moldova / EU</td>
+                                  <td>32</td>
+                                  <td>34</td>
+                                  <td>36</td>
+                                  <td>38</td>
+                                  <td>40</td>
+                                  <td>42</td>
+                              </tr>
+                              <tr>
+                                  <td>UK</td>
+                                  <td>4</td>
+                                  <td>6</td>
+                                  <td>8</td>
+                                  <td>10</td>
+                                  <td>12</td>
+                                  <td>14</td>
+                              </tr>
+                              <tr>
+                                  <td>USA</td>
+                                  <td>0</td>
+                                  <td>2</td>
+                                  <td>4</td>
+                                  <td>6</td>
+                                  <td>8</td>
+                                  <td>10</td>
+                              </tr>
+                              <tr>
+                                  <td>Russia</td>
+                                  <td>38</td>
+                                  <td>40</td>
+                                  <td>42</td>
+                                  <td>44</td>
+                                  <td>46</td>
+                                  <td>48</td>
+                              </tr>
+                              <tr>
+                                  <td>International</td>
+                                  <td>XXS</td>
+                                  <td>XS</td>
+                                  <td>S</td>
+                                  <td>M</td>
+                                  <td>L</td>
+                                  <td>XL</td>
+                              </tr>
+                              <tr>
+                                  <td><strong>Объём талии (см)</strong></td>
+                                  <td>58–60</td>
+                                  <td>61–63</td>
+                                  <td>64–67</td>
+                                  <td>68–72</td>
+                                  <td>73–76</td>
+                                  <td>77–81</td>
+                              </tr>
+                              <tr>
+                                  <td><strong>Объём бёдер (см)</strong></td>
+                                  <td>84–86</td>
+                                  <td>87–90</td>
+                                  <td>91–94</td>
+                                  <td>95–98</td>
+                                  <td>99–102</td>
+                                  <td>103–106</td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -575,7 +497,7 @@
           <div class="row">
             <div class="col-12 wow fadeInUp animated">
               <div class="section-head text-center">
-                <h2>Recent Products </h2>
+                <h2>Актуальные товары </h2>
               </div>
             </div>
           </div>
@@ -663,7 +585,7 @@
                                   class="decreaseQty"><i class="flaticon-minus"></i>
                                                             </span> <input type="number" class="qtyValue" value="1" />
                                 <span class="increaseQty"> <i class="flaticon-plus"></i>
-                                                            </span> </div> <button class="btn--primary "> Add to Cart
+                                                            </span> </div> <button class="btn--primary "> Добавить в корзину
                             </button>
                             </div>
                           </div>
@@ -680,7 +602,7 @@
                   </div>
                 </div>
                 <div class="products-grid__content"> <a href="cart.html"
-                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Add to Cart </span>
+                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Добавить в корзину </span>
                   <span class="two"> <i class="flaticon-shopping-cart"> </i> </span> </a>
                   <div class="ratting"> <i class="flaticon-star"></i> <i class="flaticon-star"></i> <i
                       class="flaticon-star"></i> <i class="flaticon-star"></i> <i
@@ -777,7 +699,7 @@
                                   class="decreaseQty"><i class="flaticon-minus"></i>
                                                             </span> <input type="number" class="qtyValue" value="1" />
                                 <span class="increaseQty"> <i class="flaticon-plus"></i>
-                                                            </span> </div> <button class="btn--primary "> Add to Cart
+                                                            </span> </div> <button class="btn--primary "> Добавить в корзину
                             </button>
                             </div>
                           </div>
@@ -794,7 +716,7 @@
                   </div>
                 </div>
                 <div class="products-grid__content"> <a href="cart.html"
-                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Add to Cart </span>
+                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Добавить в корзину </span>
                   <span class="two"> <i class="flaticon-shopping-cart"> </i> </span> </a>
                   <div class="ratting"> <i class="flaticon-star"></i> <i class="flaticon-star"></i> <i
                       class="flaticon-star"></i> <i class="flaticon-star"></i> <i
@@ -901,7 +823,7 @@
                                   class="decreaseQty"><i class="flaticon-minus"></i>
                                                             </span> <input type="number" class="qtyValue" value="1" />
                                 <span class="increaseQty"> <i class="flaticon-plus"></i>
-                                                            </span> </div> <button class="btn--primary "> Add to Cart
+                                                            </span> </div> <button class="btn--primary "> Добавить в корзину
                             </button>
                             </div>
                           </div>
@@ -918,7 +840,7 @@
                   </div>
                 </div>
                 <div class="products-grid__content"> <a href="cart.html"
-                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Add to Cart </span>
+                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Добавить в корзину </span>
                   <span class="two"> <i class="flaticon-shopping-cart"> </i> </span> </a>
                   <div class="ratting"> <i class="flaticon-star"></i> <i class="flaticon-star"></i> <i
                       class="flaticon-star"></i> <i class="flaticon-star"></i> <i
@@ -1022,7 +944,7 @@
                                   class="decreaseQty"><i class="flaticon-minus"></i>
                                                             </span> <input type="number" class="qtyValue" value="1" />
                                 <span class="increaseQty"> <i class="flaticon-plus"></i>
-                                                            </span> </div> <button class="btn--primary "> Add to Cart
+                                                            </span> </div> <button class="btn--primary "> Добавить в корзину
                             </button>
                             </div>
                           </div>
@@ -1039,7 +961,7 @@
                   </div>
                 </div>
                 <div class="products-grid__content"> <a href="cart.html"
-                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Add to Cart </span>
+                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Добавить в корзину </span>
                   <span class="two"> <i class="flaticon-shopping-cart"> </i> </span> </a>
                   <div class="ratting"> <i class="flaticon-star"></i> <i class="flaticon-star"></i> <i
                       class="flaticon-star"></i> <i class="flaticon-star"></i> <i
@@ -1141,7 +1063,7 @@
                                   class="decreaseQty"><i class="flaticon-minus"></i>
                                                             </span> <input type="number" class="qtyValue" value="1" />
                                 <span class="increaseQty"> <i class="flaticon-plus"></i>
-                                                            </span> </div> <button class="btn--primary "> Add to Cart
+                                                            </span> </div> <button class="btn--primary "> Добавить в корзину
                             </button>
                             </div>
                           </div>
@@ -1158,7 +1080,7 @@
                   </div>
                 </div>
                 <div class="products-grid__content"> <a href="cart.html"
-                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Add to Cart </span>
+                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Добавить в корзину </span>
                   <span class="two"> <i class="flaticon-shopping-cart"> </i> </span> </a>
                   <div class="ratting"> <i class="flaticon-star"></i> <i class="flaticon-star"></i> <i
                       class="flaticon-star"></i> <i class="flaticon-star"></i> <i
@@ -1263,7 +1185,7 @@
                                   class="decreaseQty"><i class="flaticon-minus"></i>
                                                             </span> <input type="number" class="qtyValue" value="1" />
                                 <span class="increaseQty"> <i class="flaticon-plus"></i>
-                                                            </span> </div> <button class="btn--primary "> Add to Cart
+                                                            </span> </div> <button class="btn--primary "> Добавить в корзину
                             </button>
                             </div>
                           </div>
@@ -1280,7 +1202,7 @@
                   </div>
                 </div>
                 <div class="products-grid__content"> <a href="cart.html"
-                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Add to Cart </span>
+                                                        class="products-grid__cart-btn btn--primary"> <span class="one"> Добавить в корзину </span>
                   <span class="two"> <i class="flaticon-shopping-cart"> </i> </span> </a>
                   <div class="ratting"> <i class="flaticon-star"></i> <i class="flaticon-star"></i> <i
                       class="flaticon-star"></i> <i class="flaticon-star"></i> <i
@@ -1309,29 +1231,59 @@
 
 <script>
 export default {
-  name: 'Show',
-  mounted() {
-    $(document).trigger('changed')
-    this.getProduct();
-  },
+    name: 'Show',
+    mounted() {
+        $(document).trigger('changed')
+        this.getProduct();
 
-  data(){
-    return {
-      product: null
-    }
-  },
+        const today = new Date();
+        const startDate = new Date();
+        const endDate = new Date();
 
-  methods: {
-    getProduct(id) {
-      this.axios.get(`/api/products/${this.$route.params.id}`).then( res => {
-        this.product = res.data.data;
-        console.log(res);
-      })
-          .finally(v => {
-            $(document).trigger('changed')
-          })
+        startDate.setDate(today.getDate() + 10);
+        endDate.setDate(today.getDate() + 30);
+
+        this.deliveryStart = this.formatDate(startDate);
+        this.deliveryEnd = this.formatDate(endDate);
     },
-  }
+    created() {
+        this.randomCount = this.getRandomInt(10, 30);
+    },
+
+    data() {
+        return {
+            product: null,
+            activeImage: '',
+            deliveryStart: '',
+            deliveryEnd: '',
+            randomCount: 0
+        }
+    },
+
+    methods: {
+        getProduct(id) {
+            this.axios.get(`/api/products/${this.$route.params.id}`).then(res => {
+                this.product = res.data.data;
+                if (this.product.product_images.length > 0) {
+                    this.activeImage = this.product.product_images[0].url;
+                }
+                console.log(res);
+            })
+                .finally(v => {
+                    $(document).trigger('changed')
+                })
+        },
+        setActiveImage(url) {
+            this.activeImage = url;
+        },
+        formatDate(date) {
+            const options = { weekday: 'long', day: '2-digit', month: 'long' };
+            return date.toLocaleDateString('ru-RU', options);
+        },
+        getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    }
 }
 </script>
 

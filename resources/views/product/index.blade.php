@@ -41,12 +41,12 @@
                                     <th>Описание</th>
                                     <th>Контент</th>
                                     <th>Цена</th>
-                                    <th>Количество</th>
+                                    <th>Кол-во</th>
                                     <th>Изображение</th>
                                     <th>Категория</th>
                                     <th>Теги</th>
                                     <th>Цвета</th>
-                                    <th>Публикация</th>
+                                    <th class="small-column"><i class="fa-solid fa-eye"></i></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,8 +54,8 @@
                                     <tr>
                                         <td>{{ $product->id }}</td>
                                         <td><a href="{{ route('product.show', $product->id) }}">{{ $product->title }}</a></td>
-                                        <td>{{ $product->description }}</td>
-                                        <td  class="custom-column">{{ Str::limit($product->content, 30) }}</td>
+                                        <td class="custom-column">{{ $product->description }}</td>
+                                        <td class="custom-column">{{ Str::limit($product->content, 30) }}</td>
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->count }}</td>
                                         <td><img src="{{ asset('storage/' . $product->preview_image) }}" alt="Preview Image" style="max-width: 150px; max-height: 150px;"></td>
@@ -69,7 +69,7 @@
                                         <td class="custom-column">
                                             @if($product->tags->isNotEmpty())
                                                 @foreach($product->tags as $tag)
-                                                    {{ $tag->title }}{!! $loop->last ? '' : ',&nbsp;' !!}
+                                                    {{ $tag->title }}{!! $loop->last ? '' : ',<br>' !!}
                                                 @endforeach
                                             @else
                                                 Нет тегов
@@ -85,7 +85,14 @@
                                                 Нет цветов
                                             @endif
                                         </td>
-                                        <td>{{ $product->is_published }}</td>
+                                        <td class="small-column">
+                                            @if($product->is_published)
+                                                <i class="fa fa-check fa-lg" style="color: green;"></i>
+                                            @else
+                                                <i class="fa fa-times fa-lg" style="color: red;"></i>
+                                            @endif
+                                        </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
