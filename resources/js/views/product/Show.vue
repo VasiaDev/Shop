@@ -270,7 +270,7 @@
               </ul>
             </div>
           </div>
-          <div class="row wow fadeInUp animated">
+          <div v-if="product" class="row wow fadeInUp animated">
             <div class="tab-content" id="pills-tabContent-two">
               <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
                    aria-labelledby="pills-description-tab">
@@ -328,8 +328,6 @@
                 <div class="product-drescription">
                   <div class="size-chirt">
                     <h4>Руководство по размерам</h4>
-                    <p class="pt-0"> Assertively conceptualize parallel process improvements through
-                      user friendly colighue to action items. </p>
                       <div class="size-tabble">
                           <table>
                               <thead>

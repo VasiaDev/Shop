@@ -3,17 +3,17 @@
         <main class="overflow-hidden ">
             <!--Start Breadcrumb Style2-->
             <section class="breadcrumb-area"
-                     style="background-image: url(/public/assets/images/inner-pages/breadcum-bg.png);">
+                     style="background-image: url(/assets/images/inner-pages/breadcum-bg.jpg);">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-content text-center wow fadeInUp animated">
-                                <h2>Cart</h2>
+                                <h2>Корзина</h2>
                                 <div class="breadcrumb-menu">
                                     <ul>
-                                        <li><a href="index.html"><i class="flaticon-home pe-2"></i>Home</a></li>
+                                        <li><a href="index.html"><i class="flaticon-home pe-2"></i>Главная</a></li>
                                         <li><i class="flaticon-next"></i></li>
-                                        <li class="active">Cart</li>
+                                        <li class="active">Корзина</li>
                                     </ul>
                                 </div>
                             </div>
@@ -32,10 +32,10 @@
                                     <table class="cart-table">
                                         <thead class="cart-header">
                                         <tr>
-                                            <th class="">Product Name</th>
-                                            <th class="price">Price</th>
-                                            <th>Quantity</th>
-                                            <th>Subtotal</th>
+                                            <th class="">Наименование</th>
+                                            <th class="price">Цена</th>
+                                            <th>Количество</th>
+                                            <th>Всего</th>
                                             <th class="hide-me"></th>
                                         </tr>
                                         </thead>
@@ -55,7 +55,7 @@
                                                     </router-link>
                                                 </div>
                                             </td>
-                                            <td>${{ product.price }}</td>
+                                            <td>{{ product.price }} lei</td>
                                             <td class="qty">
                                                 <div class="qtySelector text-center">
                                                     <span @click.prevent="minusQty(product)" class="decreaseQty"><i
@@ -82,35 +82,26 @@
                                 <div class="apply-coupon wow fadeInUp animated">
                                     <div class="apply-coupon-input-box mt-30 "><input type="text" name="coupon-code"
                                                                                       value=""
-                                                                                      placeholder="Coupon Code"></div>
+                                                                                      placeholder="Код купона"></div>
                                     <div class="apply-coupon-button mt-30">
                                         <button class="btn--primary style2"
-                                                type="submit">Apply Coupon
+                                                type="submit">Применить купон
                                         </button>
                                     </div>
                                 </div>
                                 <div class="cart-button-box-right wow fadeInUp animated">
-                                    <button class="btn--primary mt-30"
-                                            type="submit">Continue Shopping
-                                    </button>
-                                    <button class="btn--primary mt-30"
-                                            type="submit">Update Cart
-                                    </button>
+                                    <router-link to="/products" class="btn--primary mt-30"
+                                            type="submit">Продолжить шоппинг
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row w-25">
-                        <input type="text" v-model="name" placeholder="name">
-                        <input type="text" v-model="address" placeholder="address">
-                        <input type="text" v-model="email" placeholder="email">
-                        <input @click.prevent="storeOrder" type="submit" class="btn btn-primary" value="Оформить">
                     </div>
                     <div class="row pt-120">
                         <div class="col-xl-6 col-lg-7 wow fadeInUp animated">
                             <div class="cart-total-box">
                                 <div class="inner-title">
-                                    <h3>Cart Totals</h3>
+                                    <h3>Итоги корзины</h3>
                                 </div>
                             </div>
                         </div>
@@ -122,34 +113,26 @@
                                     <table class="cart-table2">
                                         <thead class="cart-header clearfix">
                                         <tr>
-                                            <th colspan="1" class="shipping-title">Shipping</th>
-                                            <th class="price">$2500.00</th>
+                                            <th colspan="1" class="shipping-title">Стоимость</th>
+                                            <th class="price">{{ totalPriceProducts }} lei</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="shipping"> Shipping</td>
+                                            <td class="shipping"> Персональные данные</td>
                                             <td class="selact-box1">
-                                                <ul class="shop-select-option-box-1">
-                                                    <li><input type="checkbox" name="free_shipping" id="option_1"
-                                                               checked=""> <label for="option_1"><span></span>Free
-                                                        Shipping</label></li>
-                                                    <li><input type="checkbox" name="flat_rate" id="option_2"> <label
-                                                        for="option_2"><span></span>Flat Rate</label></li>
-                                                    <li><input type="checkbox" name="local_pickup" id="option_3">
-                                                        <label for="option_3"><span></span>Local Pickup</label></li>
-                                                </ul>
-                                                <div class="inner-text">
-                                                    <p>Shipping options will be updated during checkout</p>
+                                                <div class="row w-100">
+                                                    <input class="mt-3" type="text" v-model="name" placeholder="Name">
+                                                    <input class="mt-3" type="text" v-model="address" placeholder="Address">
+                                                    <input class="mt-3" type="text" v-model="email" placeholder="Email">
                                                 </div>
-                                                <h4>Calculate Shipping</h4>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <h4 class="total">Total</h4>
+                                                <h4 class="total">Всего</h4>
                                             </td>
-                                            <td class="subtotal">$2500.00</td>
+                                            <td class="subtotal">{{ totalPriceProducts }} lei</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -158,33 +141,39 @@
                         </div>
                         <div class="col-xl-6 col-lg-5 wow fadeInUp animated">
                             <div class="cart-check-out mt-30">
-                                <h3>Check Out</h3>
+                                <h3>Оформление заказа</h3>
                                 <ul class="cart-check-out-list">
                                     <li>
                                         <div class="left">
-                                            <p>Subtotal</p>
+                                            <p>Итог</p>
                                         </div>
                                         <div class="right">
-                                            <p>$2500.00</p>
+                                            <p>{{ totalPriceProducts }} lei</p>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="left">
-                                            <p>Shipping</p>
+                                            <p>Стоимость доставки</p>
                                         </div>
                                         <div class="right">
-                                            <p><span>Flat rate:</span> $50.00</p>
+                                            <p>0.00 lei</p>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="left">
-                                            <p>Total Price:</p>
+                                            <p>Общая стоимость:</p>
                                         </div>
                                         <div class="right">
-                                            <p>$2550.00</p>
+                                            <p>{{ totalPriceProducts }} lei</p>
                                         </div>
                                     </li>
                                 </ul>
+                                <div class="apply-coupon-button mt-30">
+                                    <button class="btn--primary style2"
+                                            @click.prevent="storeOrder"
+                                            type="submit">Оформить
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -217,9 +206,15 @@ export default {
             let total = 0;
             this.products.forEach( product => {
                 total += parseFloat(product.price);
-            })
-            console.log(total);
+            });
             return total;
+        },
+        totalPriceProducts() {
+            let totalProducts = 0;
+            this.products.forEach( product => {
+                totalProducts += parseFloat(product.price)  * parseInt(product.qty);
+            });
+            return totalProducts;
         }
     },
 
@@ -251,7 +246,7 @@ export default {
                 'name': this.name,
                 'email': this.email,
                 'address': this.address,
-                'total_price': Number(this.totalPrice)
+                'total_price': Number(this.totalPriceProducts)
             }).then( res => {
                 console.log(res);
             })

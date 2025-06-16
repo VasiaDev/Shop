@@ -2,17 +2,17 @@
   <div>
     <main class="overflow-hidden ">
       <!--Start Breadcrumb Style2-->
-      <div class="breadcrumb-area" style="background-image: url(/public/assets/images/inner-pages/breadcum-bg.png);">
+      <div class="breadcrumb-area" style="background-image: url(/assets/images/inner-pages/breadcum-bg-1.jpg);">
         <div class="container">
           <div class="row">
             <div class="col-xl-12">
               <div class="breadcrumb-content pb-60 text-center wow fadeInUp animated">
-                <h2>Shop Grid</h2>
+                <h2>Каталог товаров</h2>
                 <div class="breadcrumb-menu">
                   <ul>
-                    <li><a href="index.html"><i class="flaticon-home pe-2"></i>Home</a></li>
+                    <li><a href="index.html"><i class="flaticon-home pe-2"></i>Главная</a></li>
                     <li> <i class="flaticon-next"></i> </li>
-                    <li class="active">Shop Grid</li>
+                    <li class="active">Каталог товаров</li>
                   </ul>
                 </div>
               </div>
@@ -29,51 +29,51 @@
               <div class="product-categories-one__inner">
                 <ul>
                   <li> <a href="#0" class="img-box">
-                    <div class="inner"> <img src="/public/assets/images/shop/product-categories-v1-img1.png"
+                    <div class="inner"> <img src="/public/assets/images/shop/aks.jpg"
                                              alt="" /> </div>
                   </a>
                     <div class="title"> <a href="#0">
-                      <h6>Accessories</h6>
+                      <h6>Аксессуары</h6>
                     </a> </div>
                   </li>
                   <li> <a href="#0" class="img-box">
-                    <div class="inner"> <img src="/public/assets/images/shop/product-categories-v1-img2.png"
+                    <div class="inner"> <img src="/public/assets/images/shop/obuvi.jpg"
                                              alt="" /> </div>
                   </a>
                     <div class="title"> <a href="#0">
-                      <h6>Furnitures</h6>
+                      <h6>Обувь</h6>
                     </a> </div>
                   </li>
                   <li> <a href="#0" class="img-box">
-                    <div class="inner"> <img src="/public/assets/images/shop/product-categories-v1-img3.png"
+                    <div class="inner"> <img src="/public/assets/images/shop/ucrasenia.jpg"
                                              alt="" /> </div>
                   </a>
                     <div class="title"> <a href="#0">
-                      <h6>Jewellery</h6>
+                      <h6>Украшения</h6>
                     </a> </div>
                   </li>
                   <li> <a href="#0" class="img-box">
-                    <div class="inner"> <img src="/public/assets/images/shop/product-categories-v1-img4.png"
+                    <div class="inner"> <img src="/public/assets/images/shop/odejda.jpg"
                                              alt="" /> </div>
                   </a>
                     <div class="title"> <a href="#0">
-                      <h6>Shoes</h6>
+                      <h6>Одежда</h6>
                     </a> </div>
                   </li>
                   <li> <a href="#0" class="img-box">
-                    <div class="inner"> <img src="/public/assets/images/shop/product-categories-v1-img5.png"
+                    <div class="inner"> <img src="/public/assets/images/shop/sliapi.jpg"
                                              alt="" /> </div>
                   </a>
                     <div class="title"> <a href="#0">
-                      <h6>Electronics</h6>
+                      <h6>Головные уборы</h6>
                     </a> </div>
                   </li>
                   <li> <a href="#0" class="img-box">
-                    <div class="inner"> <img src="/public/assets/images/shop/product-categories-v1-img6.png"
+                    <div class="inner"> <img src="/public/assets/images/shop/sport.jpg"
                                              alt="" /> </div>
                   </a>
                     <div class="title"> <a href="#0">
-                      <h6>Fashion</h6>
+                      <h6>Спорт</h6>
                     </a> </div>
                   </li>
                 </ul>
@@ -92,12 +92,12 @@
                   class="flaticon-cross"> </i> </button>
                 <div class="sidebar-holder">
                   <form action="#0" class="footer-default__subscrib-form m-0 p-0 wow fadeInUp animated">
-                    <div class="footer-input-box p-0 "> <input type="email" placeholder="Email address"
+                    <div class="footer-input-box p-0 "> <input type="email" placeholder="Эл. почта"
                                                                name="email"> <button type="submit" class="subscribe_btn"> <i
                         class="flaticon-magnifying-glass"></i> </button> </div>
                   </form>
                   <div class="single-sidebar-box mt-30 wow fadeInUp animated ">
-                    <h4>Select Categories</h4>
+                    <h4>Выберите категории</h4>
                     <div class="checkbox-item">
                       <form>
                         <div v-for="category in filterList.categories" class="form-group"> <input :value="category.id" v-model="categories" type="checkbox" :id="category.id"> <label
@@ -106,7 +106,7 @@
                     </div>
                   </div>
                   <div class="single-sidebar-box mt-30 wow fadeInUp animated">
-                    <h4>Color Option </h4>
+                    <h4>Выбор цветов </h4>
                     <ul class="color-option">
                       <li v-for="color in filterList.colors">
                         <a @click.prevent="addOrRemoveColor(color.id)" href="#0" class="color-option-single" :style="`background: ${color.title}`"> <span> {{ color.title }} </span> </a>
@@ -114,16 +114,16 @@
                     </ul>
                   </div>
                   <div class="single-sidebar-box mt-30 wow fadeInUp animated">
-                    <h4>Filter By Price</h4>
+                    <h4>Фильтровать по цене</h4>
                     <div class="slider-box">
                       <div id="price-range" class="slider"></div>
-                      <div class="output-price"> <label for="priceRange">Price:</label> <input
+                      <div class="output-price"> <label for="priceRange">Цена:</label> <input
                           type="text" id="priceRange" readonly> </div> <button @click.prevent="filterProducts" class="filterbtn"
-                                                                               type="submit"> Filter </button>
+                                                                               type="submit"> Фильтр </button>
                     </div>
                   </div>
                   <div class="single-sidebar-box mt-30 wow fadeInUp animated pb-0 border-bottom-0 ">
-                    <h4>Tags </h4>
+                    <h4>Теги </h4>
                     <ul class="popular-tag">
                       <li v-for="tag in filterList.tags">
                         <a @click.prevent="addOrRemoveTag(tag.id)" href="#0">{{ tag.title }}</a>
@@ -139,21 +139,21 @@
                   <div
                       class="shop-grid-page-top-info p-0 justify-content-md-between justify-content-center">
                     <div class="left-box wow fadeInUp animated">
-                      <p>Showing 1–12 of 50 Results</p>
+                      <p>Показано с 1 по 12 из 50 результатов</p>
                     </div>
                     <div
                         class="right-box justify-content-md-between justify-content-center wow fadeInUp animated">
                       <div class="short-by">
                         <div class="select-box">
-                          <select class="wide">
-                            <option data-display="Short by latest">Featured </option>
-                            <option value="1">Best selling </option>
-                            <option value="2">Alphabetically, A-Z</option>
-                            <option value="3">Alphabetically, Z-A</option>
-                            <option value="3">Price, low to high</option>
-                            <option value="3">Price, high to low</option>
-                            <option value="3">Date, old to new</option>
-                          </select>
+                            <select class="wide">
+                                <option data-display="Сорт. по последним">Рекомендуемые</option>
+                                <option value="1">Самые продаваемые</option>
+                                <option value="2">По алфавиту, A–Я</option>
+                                <option value="3">По алфавиту, Я–A</option>
+                                <option value="4">Цена: по возрастанию</option>
+                                <option value="5">Цена: по убыванию</option>
+                                <option value="6">Дата: от старых к новым</option>
+                            </select>
                         </div>
                       </div>
                       <div class="product-view-style d-flex justify-content-md-between justify-content-center">
@@ -191,7 +191,7 @@
                                 href="shop-details-3.html" class="d-block"> <img
                                 :src="product.image_url"
                                 class="first-img" alt="" /> <img
-                                src="/public/assets/images/home-three/productss2-hover-1.png"
+                                src="/public/assets/images/home-three/cartify.png"
                                 alt="" class="hover-img" />
                             </a>
                               <div class="products-grid-one__badge-box"> <span
@@ -260,12 +260,14 @@
                                         <span>(112)</span> </div>
                                       <p class="text"> {{ popupProduct.description}} </p>
                                       <div class="price">
-                                        <h2> ${{ popupProduct.price }} USD <del v-if="popupProduct.old_price"> ${{ popupProduct.old_price }} USD</del></h2>
-                                        <h6> In stuck</h6>
+                                        <h2> ${{ popupProduct.price }} lei <del v-if="popupProduct.old_price"> ${{ popupProduct.old_price }} lei</del></h2>
+                                        <h6> В наличие</h6>
                                       </div>
                                       <div class="color-varient">
                                         <template v-for="groupProduct in popupProduct.group_products">
-                                          <a @click.prevent="getProduct(groupProduct.id)" v-for="color in groupProduct.colors" href="#0" :style="`background: ${color.title};`" class="color-name"> <span>{{ color.title }}</span> </a>
+                                            <template v-if="groupProduct.id === product.id && groupProduct.colors.length">
+                                                <a @click.prevent="getProduct(groupProduct.id)" v-for="color in groupProduct.colors" href="#0" :style="`background: ${color.title};`" class="color-name"> <span>{{ color.title }}</span> </a>
+                                            </template>
                                         </template>
                                       </div>
 
@@ -303,7 +305,7 @@
                             <div class="products-three-single-content text-center"> <span> {{ product.category.title }} </span>
                               <h5><router-link :to="{name: 'products.show', params: {id: product.id }}"> {{ product.title }} </router-link>
                               </h5>
-                              <p><del v-if="product.old_price">${{ product.old_price }}</del> ${{product.price }}</p>
+                              <p><del v-if="product.old_price">{{ product.old_price }} lei</del> {{product.price }} lei</p>
                             </div>
                           </div>
                         </div>
@@ -432,7 +434,7 @@ export default {
         'prices': this.prices,
         'page': page
       }).then( res => {
-        this.products = res.data.data;
+          this.products = res.data.data.filter(product => product.is_published === 1);
         this.pagination = res.data.meta;
       })
           .finally(v => {
@@ -464,11 +466,11 @@ export default {
             max: max,
             values: [min, max],
             slide: function (event, ui) {
-              $("#priceRange").val("$" + ui.values[0] + " - $" + ui.values[1]);
+              $("#priceRange").val(ui.values[0] + " lei" + " - " + ui.values[1] + " lei");
               thisVue.prices = [ui.values[0], ui.values[1]]
             }
           });
-          $("#priceRange").val("$" + $("#price-range").slider("values", 0) + " - $" + $("#price-range").slider("values", 1));
+          $("#priceRange").val($("#price-range").slider("values", 0) + " lei" + " - " + $("#price-range").slider("values", 1) + " lei");
         }
 
       })
