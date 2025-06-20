@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class StoreController extends Controller
 {
@@ -18,7 +19,8 @@ class StoreController extends Controller
     {
         $data = $request->validated();
 
-        $password = Hash::make('123144151234');
+        $plainPassword = Str::random(12);
+        $password = Hash::make($plainPassword);
 
         $user = User::firstOrCreate(
             [

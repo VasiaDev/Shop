@@ -3348,7 +3348,7 @@ core-features
 
 @media (min-width: 1400px) {
   .auto-container {
-    max-width: calc(100vw - 10vw);
+    max-width: calc(100vw - 15vw);
   }
 }
 @media (min-width: 1600px) {
@@ -4549,7 +4549,6 @@ categories-tab start
 .newsLetter-popup__subscrib-form .form-group label {
   position: relative;
   cursor: pointer;
-  font-size: 12px;
   color: var(--thm-black);
 }
 .newsLetter-popup__subscrib-form .form-group label a {
@@ -4574,7 +4573,7 @@ categories-tab start
   content: "";
   display: block;
   position: absolute;
-  top: 4px;
+  top: 6px;
   left: 6px;
   width: 5px;
   height: 9px;
@@ -4632,6 +4631,7 @@ categories-tab start
 
   .newsLetter-popup__subscrib-form .input_box {
     margin: 30px 0px 30px;
+      width: 380px;
   }
 
   .newsLetter-popup__content h2 {
@@ -4640,7 +4640,7 @@ categories-tab start
   }
 
   .newsLetter-popup__subscrib-form .input_box .subscribe_btn {
-    padding: 15px 40px 15px;
+    margin-right: 40px;
     font-size: 12px;
     -webkit-transform: translateX(40px);
             transform: translateX(40px);
@@ -8082,6 +8082,22 @@ catagory4
   right: 0px;
   border-radius: 20px 0px 0px 20px;
 }
+.gallery-two__single {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-two__single img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 
 /***
 =============================================
@@ -16857,3 +16873,17 @@ home4-footer Start
   }
 }
 /*====scroll bottom to top button====*/
+
+.homeText {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.homeSmallText {
+    color: darkorange !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

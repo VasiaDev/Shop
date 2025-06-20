@@ -39,10 +39,10 @@
                                 </div>
                                 <ul class="page-dropdown-menu">
                                     <li class="dropdown-list">
-                                        <router-link to="/"><span>Home </span></router-link>
+                                        <router-link to="/"><span>Главная </span></router-link>
                                     </li>
                                     <li class="dropdown-list">
-                                        <router-link to="/products"><span>Продукты </span></router-link>
+                                        <router-link to="/products"><span>Каталог </span></router-link>
                                     </li>
                                 </ul>
                             </div>
@@ -73,7 +73,13 @@
                                                     <option value="1">АНГЛИЙСКИЙ</option>
                                                     <option value="4">РУМЫНСКИЙ</option>
                                                 </select></div>
-                                                <a href="/admin"> Вход / Регистрация </a>
+                                                <div v-if="!user">
+                                                    <a href="#" @click.prevent="openModal('login')">Вход</a> /
+                                                    <a href="#" @click.prevent="openModal('register')">Регистрация</a>
+                                                </div>
+                                                <div v-else>
+                                                    <a href="#" @click.prevent="openAccountModal">Мой аккаунт</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +96,7 @@
                                                             <router-link to="/"><span>Главная</span></router-link>
                                                         </li>
                                                         <li class="dropdown-list">
-                                                            <router-link to="/products"><span>Продукты </span>
+                                                            <router-link to="/products"><span>Каталог товаров </span>
                                                             </router-link>
                                                         </li>
 
@@ -157,7 +163,7 @@
                                                 <router-link to="/"><span>Главная</span></router-link>
                                             </li>
                                             <li class="dropdown-list">
-                                                <router-link to="/products"><span>Продукты </span></router-link>
+                                                <router-link to="/products"><span>Каталог </span></router-link>
                                             </li>
                                         </ul>
                                     </nav>
@@ -192,7 +198,7 @@
                 </div>
                 <div class="bottom">
                     <div class="total-ammount d-flex justify-content-between align-items-center">
-                        <h6 class="text-uppercase">Total:</h6>
+                        <h6 class="text-uppercase">Всего:</h6>
                         <h6 class="ammount text-uppercase">{{ totalPrice }} lei</h6>
                     </div>
                     <div class="button-box d-flex justify-content-between">
@@ -379,64 +385,335 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <div v-if="authModalOpen" class="modal-overlay" @click.self="closeModal">
+                    <div class="auth-modal">
+                        <div class="auth-content">
+                            <LoginForm v-if="activeTab === 'login'" :key="formKey" @login-success="handleLoginSuccess" />
+                            <RegisterForm v-if="activeTab === 'register'" :key="formKey" />
+                        </div>
+
+                        <div class="auth-toggle">
+                            <p v-if="activeTab === 'login'">
+                                Нет аккаунта?
+                                <span @click="activeTab = 'register'; formKey++">Зарегистрироваться</span>
+                            </p>
+                            <p v-else>
+                                Уже есть аккаунт?
+                                <span @click="activeTab = 'login'; formKey++">Войти</span>
+                            </p>
+                        </div>
+
+                        <button class="close-btn" @click="closeModal">×</button>
+                    </div>
+                </div>
+
+                <div v-if="accountModalOpen" class="modal-overlay" @click.self="closeAccountModal">
+                    <div class="auth-modal">
+                        <div class="auth-content" style="flex-direction: column; align-items: flex-start; padding: 20px;">
+                            <h2 style="margin: 0 0 20px 0;">Мой аккаунт</h2>
+
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="display: flex;">
+                                    <strong style="width: 80px;">Имя:</strong>
+                                    <span>{{ user.name }}</span>
+                                </div>
+                                <div style="display: flex;">
+                                    <strong style="width: 80px;">Email:</strong>
+                                    <span>{{ user.email }}</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                                <button
+                                    v-if="user.role === 1"
+                                    @click="goToAdminPanel"
+                                    style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer;">
+                                    Control Panel
+                                </button>
+
+                                <button
+                                    @click="logout"
+                                    style="background-color: #ff6b00; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer;">
+                                    Выйти
+                                </button>
+                            </div>
+                        </div>
+
+                        <button class="close-btn" @click="closeAccountModal">×</button>
+                    </div>
+                </div>
+
+                <div v-if="successMessage" class="alert-success">
+                    {{ successMessage }}
+                </div>
+
+            </div>
         </footer>
     </div>
 </template>
 
 <script>
+import RegisterForm from './views/authentication/RegisterForm.vue'
+import LoginForm from './views/authentication/LoginForm.vue'
+import axios from 'axios'
+
 export default {
     name: 'App',
-    mounted() {
-        $(document).trigger('changed');
-        this.getCartProducts();
+    components: {
+        RegisterForm,
+        LoginForm
     },
     data() {
         return {
+            user: null,
             products: [],
+            activeTab: 'login',
+            authModalOpen: false,
+            accountModalOpen: false,
+            successMessage: '',
+            formKey: 0,
+            redirectAfterLogin: null,
         }
     },
     computed: {
         totalPrice() {
-            let total = 0;
-            this.products.forEach( product => {
-                total += parseFloat(product.price) * parseInt(product.qty);
-            });
-            return total;
+            return this.products.reduce((total, product) => {
+                return total + parseFloat(product.price) * parseInt(product.qty)
+            }, 0)
         },
         totalQuantity() {
-            return this.products.reduce((total, product) => total + Number(product.qty), 0);
+            return this.products.reduce((total, product) => {
+                return total + Number(product.qty)
+            }, 0)
         }
     },
     methods: {
+        goToAdminPanel() {
+            this.closeAccountModal();
+            this.redirectAfterLogin = '/admin';
+            this.activeTab = 'login';
+            this.authModalOpen = true;
+        },
+        handleLoginSuccess(userData) {
+            this.closeModal();
+            this.user = userData;
+
+            this.successMessage = 'Вы успешно вошли в аккаунт!';
+            setTimeout(() => {
+                this.successMessage = '';
+            }, 4000);
+
+            if (this.redirectAfterLogin) {
+                const target = this.redirectAfterLogin;
+                this.redirectAfterLogin = null;
+                window.location.href = target;
+            } else {
+                this.getUser();
+            }
+        },
+        openModal(tab = 'login') {
+            this.activeTab = tab
+            this.authModalOpen = true
+            this.formKey++
+            document.body.classList.add('blurred')
+        },
+        closeModal() {
+            this.authModalOpen = false
+            document.body.classList.remove('blurred')
+        },
+        async getUser() {
+            const token = localStorage.getItem('token')
+            try {
+                const res = await axios.get('/api/user', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                this.user = res.data
+            } catch (err) {
+                console.error(err)
+            }
+        },
+        openAccountModal() {
+            this.accountModalOpen = true
+            document.body.classList.add('blurred')
+        },
+        closeAccountModal() {
+            this.accountModalOpen = false
+            document.body.classList.remove('blurred')
+        },
+        logout() {
+            localStorage.removeItem('token')
+            this.user = null
+            this.closeAccountModal()
+        },
         getCartProducts() {
-            this.products = JSON.parse(localStorage.getItem('cart'));
+            const cart = localStorage.getItem('cart')
+            this.products = cart ? JSON.parse(cart) : []
         },
         minusQty(product) {
-            if (product.qty === 1) return;
-            product.qty--;
-            this.updateCart();
+            if (product.qty === 1) return
+            product.qty--
+            this.updateCart()
         },
         plusQty(product) {
-            product.qty++;
-            this.updateCart();
+            product.qty++
+            this.updateCart()
         },
         removeProduct(id) {
-            this.products = this.products.filter( product => {
-                return product.id !== id;
-            });
-            this.updateCart();
+            this.products = this.products.filter(p => p.id !== id)
+            this.updateCart()
         },
         removeAllProducts() {
-            this.products = [];
-            this.updateCart();
+            this.products = []
+            this.updateCart()
         },
         updateCart() {
-            localStorage.setItem('cart', JSON.stringify(this.products));
-        },
+            localStorage.setItem('cart', JSON.stringify(this.products))
+        }
+    },
+    mounted() {
+        $(document).trigger('changed');
+        this.getCartProducts();
+        this.getUser();
     }
 }
 </script>
 
-<style>
 
+<style scoped>
+.alert-success {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff6b00;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 9999;
+    font-size: 16px;
+}
+
+.auth-toggle {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.auth-toggle span {
+    color: #ff6b00;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: color 0.3s;
+}
+
+.auth-toggle span:hover {
+    color: #e95c00;
+}
+
+body.blurred #app > *:not(.modal-overlay) {
+    filter: blur(6px);
+    pointer-events: none;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.auth-modal {
+    background: #fff;
+    padding: 35px 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.close-btn:hover {
+    color: #ff6b00;
+}
+
+.auth-tabs button {
+    padding: 10px 25px;
+    font-size: 16px;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tabs button.active {
+    background-color: #ff6b00;
+    color: #fff;
+    border-color: #ff6b00;
+}
+
+.auth-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.auth-modal button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6b00;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    text-align: center;
+}
+.auth-modal button[type="submit"]:hover {
+    background-color: #e95c00;
+}
 </style>
+
+
+

@@ -123,8 +123,8 @@
                                             <td class="selact-box1">
                                                 <div class="row w-100">
                                                     <input class="mt-3" type="text" v-model="name" placeholder="Name">
-                                                    <input class="mt-3" type="text" v-model="address" placeholder="Address">
                                                     <input class="mt-3" type="text" v-model="email" placeholder="Email">
+                                                    <input class="mt-3" type="text" v-model="address" placeholder="Address">
                                                 </div>
                                             </td>
                                         </tr>
@@ -174,6 +174,9 @@
                                             type="submit">Оформить
                                     </button>
                                 </div>
+                                <div v-if="successMessage" class="alert-success">
+                                    {{ successMessage }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -190,6 +193,12 @@ export default {
     mounted() {
         $(document).trigger('changed')
         this.getCartProducts();
+        if (window.authUser) {
+            this.name = window.authUser.name || '';
+            this.email = window.authUser.email || '';
+            this.address = window.authUser.address || '';
+        }
+        console.log(window.authUser);
     },
 
     data() {
@@ -197,7 +206,8 @@ export default {
             products: [],
             name: '',
             address: '',
-            email: ''
+            email: '',
+            successMessage: '',
         }
     },
 
@@ -215,7 +225,7 @@ export default {
                 totalProducts += parseFloat(product.price)  * parseInt(product.qty);
             });
             return totalProducts;
-        }
+        },
     },
 
     methods: {
@@ -247,17 +257,38 @@ export default {
                 'email': this.email,
                 'address': this.address,
                 'total_price': Number(this.totalPriceProducts)
-            }).then( res => {
-                console.log(res);
-            })
-                .finally(v => {
-                    $(document).trigger('changed')
-                })
-        },
+            }).then(res => {
+                this.successMessage = 'Ваш заказ успешно оформлен!';
+                setTimeout(() => {
+                    this.successMessage = '';
+                }, 4000);
+
+                this.products = [];
+                localStorage.removeItem('cart');
+
+                this.name = '';
+                this.email = '';
+                this.address = '';
+            }).finally(() => {
+                $(document).trigger('changed');
+            });
+        }
     }
 }
 </script>
 
 <style scoped>
-
+.alert-success {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff6b00;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 9999;
+    font-size: 16px;
+}
 </style>

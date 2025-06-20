@@ -4,11 +4,13 @@
     <div class="app-content-header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6"><h3 class="mb-0">Редактировать продукт</h3></div>
+                <div class="col-sm-6"><h3 class="mb-0">Редактировать товар</h3></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Главная</li>
+                        <li class="breadcrumb-item"><a href="{{ route('main.index') }}">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('product.index') }}">Товары</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('product.show', $product->id) }}">{{ $product->title }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Редактирование</li>
                     </ol>
                 </div>
             </div>

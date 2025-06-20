@@ -17,8 +17,10 @@ class FilterListController extends Controller
         $colors = Color::all();
         $tags = Tag::all();
 
-        $minPrice = Product::orderBy('price', 'ASC')->first()->price;
-        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
+        $publishedProducts = Product::where('is_published', 1);
+
+        $minPrice = $publishedProducts->min('price');
+        $maxPrice = $publishedProducts->max('price');
 
         $result = [
             'categories' => $categories,

@@ -72,7 +72,7 @@
                   <p class="shop-details-top-product-sale">Продано <span>20</span> за последние 12 часов
                   </p>
                   <div class="shop-details-top-size-box">
-                    <h4>Size:</h4>
+                    <h4>Размер:</h4>
                     <div class="shop-details-top-size-list-box">
                       <ul class="shop-details-top-size-list">
                         <li><a href="#0">XS</a></li>
@@ -80,11 +80,11 @@
                         <li><a href="#0">M</a></li>
                         <li><a href="#0">XL</a></li>
                       </ul>
-                      <p class="shop-details-top-size-guide"><a href="#0">Size Guide</a></p>
+                      <p class="shop-details-top-size-guide"><a href="#0">Таблица размеров</a></p>
                     </div>
                   </div>
                   <div class="shop-details-top-color-sky-box">
-                    <h4>Colors:</h4>
+                    <h4>Цвета:</h4>
                       <template v-if="product.group_products.length">
                           <template v-for="groupProduct in product.group_products" :key="groupProduct.id">
                               <template v-if="groupProduct.id === product.id && groupProduct.colors.length">
@@ -112,12 +112,12 @@
                     </a> </li>
                   </ul>
                   <div class="timer-box">
-                    <h4>Running Offer</h4>
+                    <h4>Действующее предложение</h4>
                     <div class="countdown-timer">
                       <div class="default-coundown">
                         <div class="box">
                           <div class="countdown time-countdown-two"
-                               data-countdown-time="2022/03/12"></div>
+                               data-countdown-time="2025/06/25"></div>
                         </div>
                       </div>
                     </div>

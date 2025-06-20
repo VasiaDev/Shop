@@ -2,12 +2,12 @@
 <html lang="en">
 <!--begin::Head-->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Cartify | Control Panel</title>
     <!--begin::Primary Meta Tags-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="Cartify | Control Panel" />
-    <meta name="author" content="ColorlibHQ" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="title" content="Cartify | Control Panel"/>
+    <meta name="author" content="ColorlibHQ"/>
     <meta
         name="description"
         content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS."
@@ -25,7 +25,8 @@
         integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
         crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
+          integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <!--end::Fonts-->
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <link
@@ -44,7 +45,7 @@
     />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.css') }}"/>
     <!--end::Required Plugin(AdminLTE)-->
     <!-- apexcharts -->
     <link
@@ -66,16 +67,18 @@
             overflow-wrap: break-word;
             white-space: normal;
         }
+
         table {
             width: 100%;
         }
+
         .small-column {
             width: 10px;
             overflow-wrap: break-word;
             white-space: normal;
         }
     </style>
-    <link href="{{ asset('/adminlte/multiple_select/css/mobiscroll.javascript.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/adminlte/multiple_select/css/mobiscroll.javascript.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('/adminlte/multiple_select/js/mobiscroll.javascript.min.js') }}"></script>
 </head>
 <!--end::Head-->
@@ -228,10 +231,13 @@
             <!--begin::Brand Link-->
             <a href="./index.html" class="brand-link">
                 <!--begin::Brand Text-->
-                <span class="brand-text">
-                  <span class="fw-bold fs-4">Cartify</span>
-                  <span class="fw-light fs-6 ms-1">Control Panel</span>
-                </span>
+                <a href="{{ route('main.index') }}" style="text-decoration: none">
+                    <span class="brand-text">
+                        <span class="fw-bold fs-4">Cartify</span>
+                        <span class="fw-light fs-6 ms-1">Control Panel</span>
+                    </span>
+                </a>
+
 
                 <!--end::Brand Text-->
             </a>
@@ -249,7 +255,7 @@
                     data-accordion="false"
                 >
                     <li class="nav-item">
-                        <a href="./docs/layout.html" class="nav-link">
+                        <a href="{{ route('order.index')  }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-bag-shopping"></i>
                             <p>Заказы</p>
                         </a>
@@ -257,15 +263,15 @@
                     <li class="nav-item">
                         <a href="{{ route('product.index') }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-shirt"></i>
-                            <p>Продукты</p>
+                            <p>Товары</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('group.index') }}" class="nav-link">
-                            <i class="nav-icon fa-solid fa-layer-group"></i>
-                            <p>Группы</p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route('group.index') }}" class="nav-link">--}}
+{{--                            <i class="nav-icon fa-solid fa-layer-group"></i>--}}
+{{--                            <p>Группы</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <li class="nav-item">
                         <a href="{{ route('category.index') }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-list"></i>
@@ -284,10 +290,16 @@
                             <p>Цвета</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-top: 300px">
                         <a href="{{ route('user.index') }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-users"></i>
                             <p>Пользователи</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-top: 20px">
+                        <a href="{{ url('/products') }}" class="nav-link">
+                            <i class="fa-solid fa-arrow-left pt-1"></i>
+                            <p>Cartify</p>
                         </a>
                     </li>
                 </ul>
@@ -309,8 +321,8 @@
         <!--end::To the end-->
         <!--begin::Copyright-->
         <strong>
-            Copyright &copy; 2014-{{ now()->year }}&nbsp;
-            <a href="{{ route('main.index') }}" class="text-decoration-none">AdminShop</a>.
+            Copyright &copy; 2025-{{ now()->year }}&nbsp;
+            <a href="{{ route('main.index') }}" class="text-decoration-none">Cartify</a>.
         </strong>
         Все права защищены.
         <!--end::Copyright-->
@@ -335,7 +347,7 @@
             handleTrialText();
         });
 
-        observer.observe(document.body, { childList: true, subtree: true });
+        observer.observe(document.body, {childList: true, subtree: true});
     });
 
     mobiscroll.setOptions({

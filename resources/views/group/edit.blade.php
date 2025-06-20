@@ -10,8 +10,10 @@
                 <div class="col-sm-6"><h3 class="mb-0">Редактировать группу</h3></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Главная</li>
+                        <li class="breadcrumb-item"><a href="{{ route('main.index') }}">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('group.index') }}">Группы</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('group.show', $group->id) }}">{{ $group->title }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Редактирование</li>
                     </ol>
                 </div>
             </div>

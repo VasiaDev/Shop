@@ -11,4 +11,7 @@
 
 <div id="app"></div>
 </body>
+<script>
+    window.authUser = @json(Auth::check() ? Auth::user() : null);
+</script>
 @endsection

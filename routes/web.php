@@ -67,6 +67,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/{group}', \App\Http\Controllers\Group\DeleteController::class)->name('group.delete');
     });
 
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', \App\Http\Controllers\Order\IndexController::class)->name('order.index');
+    });
+
 });
 
 Route::get('{page}', \App\Http\Controllers\Client\IndexController::class)->where('page', '.*');

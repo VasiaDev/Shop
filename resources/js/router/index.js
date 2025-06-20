@@ -24,6 +24,16 @@ const router = createRouter({
             component: () => import('../views/cart/Index.vue'),
         }
     ],
-})
+});
+
+router.beforeEach((to, from, next) => {
+    axios.get('/sanctum/csrf-cookie', { withCredentials: true })
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next();
+        });
+});
 
 export default router
