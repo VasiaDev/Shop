@@ -417,6 +417,7 @@
 export default {
     name: 'Index',
     mounted() {
+        this.setupAxiosCsrf();
         $(document).trigger('changed')
         this.getProducts();
         this.getFilterList();
@@ -436,6 +437,26 @@ export default {
     },
 
     methods: {
+        setupAxiosCsrf() {
+            // Функция для получения cookie по имени
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            // Включаем отправку cookie с запросами
+            axios.defaults.withCredentials = true;
+
+            // Добавляем interceptor, чтобы подставлять X-XSRF-TOKEN из cookie в заголовок
+            axios.interceptors.request.use(config => {
+                const token = getCookie('XSRF-TOKEN');
+                if (token) {
+                    config.headers['X-XSRF-TOKEN'] = decodeURIComponent(token);
+                }
+                return config;
+            });
+        },
         addToCart(product, isSingle) {
 
             let qty = isSingle ? 1 : $('.qtyValue').val();
@@ -492,23 +513,22 @@ export default {
                 });
             }
         },
+
         getProducts(page = 1) {
-            axios.get('/sanctum/csrf-cookie', {withCredentials: true})
-                .then(() => {
-                    return axios.post('/api/products', {
-                        categories: this.categories,
-                        colors: this.colors,
-                        tags: this.tags,
-                        prices: this.prices,
-                        page: page
-                    }, {
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        withCredentials: true
-                    });
-                })
+            // Здесь НЕ нужно повторно вызывать /sanctum/csrf-cookie, т.к. он уже получен в mounted()
+            axios.post('/api/products', {
+                categories: this.categories,
+                colors: this.colors,
+                tags: this.tags,
+                prices: this.prices,
+                page: page
+            }, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+                // withCredentials уже включен глобально
+            })
                 .then(res => {
                     this.products = res.data.data.filter(product => product.is_published === 1);
                     this.pagination = res.data.meta;
